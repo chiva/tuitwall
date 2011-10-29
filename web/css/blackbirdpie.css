@@ -1,0 +1,44 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700);
+
+.bbp-actions {
+	padding-bottom:.5em;
+	font-size:12px;
+	width:100%;
+	padding:5px 0;
+	margin:0 0 10px 0;
+	border-bottom:1px solid #e6e6e6;
+	background-image:url(../images/bird.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.bbp-actions a{color:#999 !important; text-decoration:none;}
+.bbp-actions a:hover{color:#666 !important; text-decoration:none !important;}
+.bbp-actions a span em{text-indent:-99999px;outline:none;background:transparent url(../images/twitter-icons.png) no-repeat;width:15px;height:15px;margin:0 2px 0 2px;display:block;margin-left:0em;}
+.bbp-actions a span em{display:inline-block;vertical-align:baseline;margin-bottom:-3.5px;margin-right:3px;position:relative;}
+.bbp-actions a span strong{padding-left:.25em;font-weight:normal;}
+.bbp-actions .bbp-reply-action span em{background-position:0 0;margin-right:0; margin-left: 1em;}
+.bbp-actions .bbp-reply-action:hover span em{background-position:-16px 0;}
+.bbp-actions .bbp-retweet-action span em{background-position:-80px 0; margin-left: 1em;}
+.bbp-actions .bbp-retweet-action:hover span em{background-position:-96px 0;}
+.bbp-actions .bbp-favorite-action span em{background-position:-32px 0; margin-left: 1em;}
+.bbp-actions .bbp-favorite-action:hover span em{background-position:-48px 0;}
+.bbp-actions img { margin:0 !important; padding: 0 !important; background:none !important; border:none !important;}
+.bbpBox {
+	padding:20px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	font-family:'Droid Sans', arial, sans-serif;
+	width:80%;
+	box-shadow: 0 0 15px #000000;
+}
+.bbpBoxIn {
+	background:#fff;
+	padding:10px;
+	margin:0;
+	min-height:48px;
+	border-radius:5px;
+}
+.bbpTweet {font-size:18px; line-height:22px;}
+
+.colorbox2 { width:48px; height:48px; border:none; background:none; margin-right: 7px; }
