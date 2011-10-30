@@ -14,10 +14,10 @@ Requisites
 
 **Electronics**
 
-- `Arduino board`
-- `Arduino Ethernet Shield`
-- `Ethernet cable`
-- `Sure Electronic's 32x08 Red Led 5mm Dot Matrix`
+- `Arduino board`_
+- `Arduino Ethernet Shield`_
+- `Ethernet cable`_
+- `Sure Electronic's 32x08 Red Led 5mm Dot Matrix`_
 - HT1632-for-Arduino_ library
 - `Arduino IDE`_ v1.0 or newer
 
