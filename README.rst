@@ -37,6 +37,7 @@ Configuration
 
 - SERVER: root direction of the web interface (excluding ``http://``)
 - CONSUMER_KEY & CONSUMER_SECRET: consumer application keys, get them from https://dev.twitter.com/apps
+- ANYWHERE_CONSUMER_KEY: key to make @Anywhere available at the page to auto-linkify @users, #hastags and http://links
 - OAUTH_CALLBACK: location of the PHP script that will receive the OAuth Callback. It should point to ``callback.php``
 - API_KEY: only devices with the same ``API_KEY`` will be able to get tweets through fetch.php. Leave empty (``""``) to disable the check
 - SHOW_TWEET: show current tweet at main page?
@@ -65,6 +66,7 @@ Usage
    b) Change the ``API_KEY`` to a different one. Remember to use the same in the Arduino sketch and ``config.php``
    c) Create a `Twitter application`_ and point the *Callback URL* to the location of ``callback.php``
    d) Copy the *Consumer key* and *Consumer secret* keys to ``config.php``
+   e) If you want the @Anywhere auto-linkify functions create another application in Twitter and copy the *Consumer key*. Callback URL just has to match up to the subdomain.
 3. Mount the Arduino and Ethernet Shield and connect to the PC
 4. Upload ``tuitwall.ino`` to the Arduino
 5. Connect the led matrix board to the Arduino (schematic comming soon!)
