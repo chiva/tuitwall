@@ -10,4 +10,5 @@ define('SHOW_TWEET', true);												// mostrar tweet en página principal
 define('SHOW_USER', true);												// incluir de quien es el tweet cuando Arduino lo pida
 define('STREAM', false);												// mostrar stream desde UStream para demos del proyecto
 define('USTREAM_ID', 9584783);											// ID del stream de UStreama a mostrar
+define('DISALLOW_LOGOUT', false);										// deshabilita el poder cerrar sesión, útil para demos o si queremos fijar la configuración
 ?>

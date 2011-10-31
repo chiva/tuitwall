@@ -45,7 +45,7 @@ void setup() {
   Serial.begin(115200);
   
   Serial.println();
-  Serial.println(F("tuitwall BETA1"));
+  Serial.println(F("tuitwall BETA2"));
   Serial.println(F("KungFu Labs - http://www.kungfulabs.com"));
   Serial.println(F("tuitwall Copyright (C) 2011  Santiago Reig"));
   Serial.println();

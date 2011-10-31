@@ -2,7 +2,9 @@
 	<div style="float: left; padding-right: 8px; margin: 0; text-align: right;">
 		<?php echo ucfirst($access_token['type']);?>
 		<div style="margin:0; padding-top:3px;">
-			<a href='./clearsessions.php'>Cerrar Sesión</a>
+			<?php if (!DISALLOW_LOGOUT){
+				echo "<a href='./clearsessions.php'>Cerrar Sesión</a>";
+			}?>
 		</div>
 	</div>
 	<div style="float: left; padding: 0; margin: 0; height: 48px; border-left: 1px solid #E6E6E6;">

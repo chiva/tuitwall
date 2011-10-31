@@ -9,7 +9,21 @@
 	<body>
 		<div>
 			<h1><span>tuit</span>wall</h1>
-			<h3>Inicia sesión con tu usuario y verás los tweets en la barra de LEDs</h3>
+			<?php if (DISALLOW_LOGOUT){
+				switch ($access_token['type']){
+					case "timeline":
+						echo "<h3>¿Cual es la actualidad?</h3>";
+						break;
+					case "menciones":
+						echo "<h3>¡Menciona a @{$access_token['screen_name']} y aparece!</h3>";
+						break;
+					case "propios":
+						echo "<h3>¿Que nos cuenta?</h3>";
+						break;
+				}
+			}
+			else echo "<h3>Inicia sesión con tu usuario y verás los tweets en la barra de LEDs</h3>";
+			?>
 		</div>
 		<?php if (isset($error)) {
 				if (isset($access_token['user_id'])) {include('logged.inc');}
