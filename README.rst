@@ -41,7 +41,7 @@ Configuration
 - OAUTH_CALLBACK: location of the PHP script that will receive the OAuth Callback. It should point to ``callback.php``
 - API_KEY: only devices with the same ``API_KEY`` will be able to get tweets through fetch.php. Leave empty (``""``) to disable the check
 - SHOW_TWEET: show current tweet at main page?
-- SHOW_USER: include tweet owner when giving a tweet to a device through `fetch.php`?
+- SHOW_USER: include tweet owner when giving a tweet to a device through ``fetch.php``?
 - STREAM: show a stream from UStream at the main page? Useful when doing a demo of the project
 - USTREAM_ID: ID of the stream from UStream you want to show
 - DISALLOW_LOGOUT: disallow logging out to keep tweets of a specific user being shown. To log out you have to delete ``auth.txt`` from the web server
