@@ -20,8 +20,7 @@
 	<div style="float: left; padding: 0; margin: 0; padding-left: 8px">
 		Código fuente
 		<div style="margin:0; padding-top: 4px;">
-			<a href="http://github.com/chiva/tuitwall" target="_blank" class="gitwatch small">GitHub</a>
-			<script type="text/javascript" src="https://raw.github.com/addyosmani/github-watchers-button/master/github-watchers.min.js"></script>
+			<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=chiva&repo=tuitwall&type=fork" allowtransparency="true" frameborder="0" scrolling="0" width="54px" height="20px"></iframe>
 		</div>
 	</div>
 </div>
