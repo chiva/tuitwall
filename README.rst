@@ -21,7 +21,7 @@ Requisites
 - HT1632-for-Arduino_ library
 - `Arduino IDE`_ v1.0 or newer
 
-Note: this has been tested only with one led matrix, but it can be extended up to 4 boards with proper code.
+Note: this has been tested only with one led matrix, but it can be extended up to 4 boards (and further) with proper code.
 
 .. _`Arduino board`: http://arduino.cc/en/Main/ArduinoBoardUno
 .. _`Arduino Ethernet Shield`: http://www.arduino.cc/en/Main/ArduinoEthernetShield
@@ -76,7 +76,12 @@ Usage
 8. Reset the board
 9. Enjoy!
 
-Remember that the sketch outputs debug messages to the serial port, so you can follow the initialization and execution of the sketch.
+Remember that the sketch outputs debug messages to the serial port (at 115200bps), so you can follow the initialization and execution of the sketch.
 The Ethernet Shield relies on a DHCP enabled network, if this is not the case, please modify the code as required to give an appropiate static IP.
 
 .. _Twitter application: https://dev.twitter.com/apps
+
+Schematic
+---------
+
+.. image:: https://github.com/chiva/tuitwall/raw/master/images/tuitwall-schematic.png
