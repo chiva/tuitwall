@@ -1,6 +1,6 @@
 <?php
 
-define('SERVER', 'tuitwall.kungfulabs.com');							// definir la raíz de la página
+define('SERVER', $_SERVER['SERVER_NAME']);  							// definir la raíz de la página
 define('CONSUMER_KEY', '');						// llaves de aplicación de twitter
 define('CONSUMER_SECRET', '');
 define('ANYWHERE_CONSUMER_KEY', '');			// llaves de @Anywhere de Twitter (sirve para auto-enlazar los usuarios de twitter, hastags y enlaces en los tweets)
