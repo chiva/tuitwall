@@ -30,6 +30,7 @@
 #define INTERVAL 12000  // cada cuantos milisegundos pedir el tweet
 #define VEC_LENGTH 200  // longitud del vector donde se va a almacenar el tweet TODO: longitud maxima tweet con RT incluido?
 #define SPEED 40        // cambiar para variar la velocidad
+#define TIMEOUT         // tiempo maximo para recibir un tweet
 
 // Introduce la direccion MAC de tu placa ethernet abajo
 // Las nuevas placas de ethernet tienen la direccion MAC imprimida en una pegatina
@@ -57,12 +58,12 @@ void setup() {
   int wd = HT1632.getTextWidth("Welcome", FONT_5X4_WIDTH, FONT_5X4_HEIGHT);
   showText("Welcome", wd-1);
   Serial.println(F("OK"));
-  Serial.print(F("Ethernet............. "));
 
+  Serial.print(F("Ethernet............. "));
   if (Ethernet.begin(mac) == 0) {
     Serial.println(F("ERROR - DHCP"));
-    int wd = HT1632.getTextWidth(text, FONT_5X4_WIDTH, FONT_5X4_HEIGHT);
-    showText("Error-DHCP", wd-1);
+    int wd = HT1632.getTextWidth("E-DHCP", FONT_5X4_WIDTH, FONT_5X4_HEIGHT);
+    showText("E-DHCP", wd-1);
     // no se pudo obtener una IP, detenemos la ejecucion del programa
     for(;;);
   }
@@ -127,7 +128,7 @@ void getTweet(char tweet[]){
   }
   
   Serial.print(F("Recibiendo........... "));
-  while (client.connected() && (millis()-2000 < previousTime)) {
+  while (client.connected() && (millis()-TIMEOUT < previousTime)) {
     char c = client.read();
     // si es un carácter normal, lo guardamos en el vector temporal
     if (c != -1) buf[pos++] = c;
