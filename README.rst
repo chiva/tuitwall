@@ -70,7 +70,7 @@ Usage
    e) If you want the @Anywhere auto-linkify functions create another application in Twitter and copy the *Consumer key*. Callback URL just has to match up to the subdomain.
 3. Mount the Arduino and Ethernet Shield and connect to the PC
 4. Upload ``tuitwall.ino`` to the Arduino
-5. Connect the led matrix board to the Arduino (schematic comming soon!)
+5. Connect the led matrix board to the Arduino (continue reading for schematic)
 6. Check that the led matrix board has its direction set to 1 (switches at the back)
 7. Connect the Ethernet Shield to a router through an ethernet cable
 8. Reset the board
