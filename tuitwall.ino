@@ -55,15 +55,13 @@ void setup() {
   Serial.println();
   Serial.print(F("Panel led............ "));
   HT1632.begin(7,6,5);
-  int wd = HT1632.getTextWidth("Welcome", FONT_5X4_WIDTH, FONT_5X4_HEIGHT);
-  showText("Welcome", wd-1);
+  centerText("Welcome");
   Serial.println(F("OK"));
 
   Serial.print(F("Ethernet............. "));
   if (Ethernet.begin(mac) == 0) {
     Serial.println(F("ERROR - DHCP"));
-    int wd = HT1632.getTextWidth("E-DHCP", FONT_5X4_WIDTH, FONT_5X4_HEIGHT);
-    showText("E-DHCP", wd);
+    centerText("E-DHCP");
     // no se pudo obtener una IP, detenemos la ejecucion del programa
     Serial.println(F("## Ejecucion detenida ##"));
     for(;;);
@@ -100,6 +98,14 @@ void showText(char text[], int offset){
   HT1632.clear();
   HT1632.drawText(text, OUT_SIZE - offset, 2, FONT_5X4, FONT_5X4_WIDTH, FONT_5X4_HEIGHT, FONT_5X4_STEP_GLYPH);
   HT1632.render();
+}
+
+void centerText(char text[]){
+  int wd = HT1632.getTextWidth(text, FONT_5X4_WIDTH, FONT_5X4_HEIGHT);
+  int offset;
+  if (wd < OUT_SIZE) offset = int(((OUT_SIZE+float(wd))/2)+0.5);
+  else offset = OUT_SIZE;
+  showText(text, offset);
 }
 
 void getTweet(char tweet[]){
