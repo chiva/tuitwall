@@ -142,7 +142,10 @@ void getTweet(char tweet[]){
       // si estamos en la última posición del vector, forzamos a escribir el delimitador de
       // cadena de texto (\0) para así evitar sobreescribir memoria descontroladamente si
       // el tweet tiene una longitud mayor a VEC_LENGTH
-      if (pos == VEC_LENGTH) c = '\0';
+      if (pos == VEC_LENGTH){
+        c = '\0';
+        Serial.print(F("OVERFLOW - "));
+      }
       // el último carácter de la cadena es el 0, por lo que sabemos que es el fin de la cadena
       if (c == '\0') {
         Serial.println(F("OK"));
