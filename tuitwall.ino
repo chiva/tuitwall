@@ -101,8 +101,8 @@ void showText(char text[], int offset){
 }
 
 void getTweet(char tweet[]){
-  static long previousTime = 0;   // última vez que pedimos un tweet
-  static boolean skipWait = true; // ¿debemos saltarnos la espera?
+  static long previousTime = 0;  // última vez que pedimos un tweet
+  static boolean skipWait;       // ¿debemos saltarnos la espera?
   
   // si no tenemos que saltarnos la espera y no ha pasado INTERVAL milisegundos desde la ultima petición
   // no pedimos el nuevo tweet. Ésto es debido a que twitter limita el número de peticiones por hora a 350
@@ -111,9 +111,12 @@ void getTweet(char tweet[]){
 
   static int pos = 0;            // posición del vector donde guardar un nuevo dato
   static char buf[VEC_LENGTH];   // vector donde guardar temporalmente el tweet hasta saber que lo tenemos completo
-  static boolean timeout = true; // damos por supuesto que ha ocurrido un timeout hasta que se demuestre lo contrario
-  
+  static boolean timeout;        // damos por supuesto que ha ocurrido un timeout hasta que se demuestre lo contrario
+
+  skipWait = true;
+  timeout = true;
   previousTime = millis();
+
   Serial.print(F("Conectando........... "));
   // nos conectamos al servidor al puerto 80 (protocolo http)
   if (client.connect(SERVER, 80)) {
@@ -125,6 +128,7 @@ void getTweet(char tweet[]){
   else {
     // si no conseguimos conectarnos al servidor
     Serial.println(F("ERROR"));
+    return;
   }
   
   Serial.print(F("Recibiendo........... "));
