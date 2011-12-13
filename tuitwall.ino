@@ -65,6 +65,7 @@ void setup() {
     int wd = HT1632.getTextWidth("E-DHCP", FONT_5X4_WIDTH, FONT_5X4_HEIGHT);
     showText("E-DHCP", wd);
     // no se pudo obtener una IP, detenemos la ejecucion del programa
+    Serial.println(F("## Ejecucion detenida ##"));
     for(;;);
   }
   Serial.println(F("OK"));
