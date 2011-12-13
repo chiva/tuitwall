@@ -75,7 +75,6 @@ void setup() {
 
 void loop()
 {
-  Serial.println();
   // pedimos el último tweet
   getTweet(msg);
   // lo mostramos en pantalla haciendo un scroll completo
@@ -118,13 +117,17 @@ void getTweet(char tweet[]){
   // si no tenemos que saltarnos la espera y no ha pasado INTERVAL milisegundos desde la ultima petición
   // no pedimos el nuevo tweet. Ésto es debido a que twitter limita el número de peticiones por hora a 350
   // https://dev.twitter.com/docs/rate-limiting#rest
-  if (!skipWait && (millis()-INTERVAL < previousTime)) return;
+  if (!skipWait && (millis()-INTERVAL < previousTime)){
+    Serial.println("Limitador activo - Reusar tweet");
+    return;
+  }
 
   skipWait = true;
   previousTime = millis();
   pos = 0;
   strcpy(buf,"1");                // iniciamos la cadena a un valor conocido distinto de \0 para saber si hubo error al recibir
 
+  Serial.println();
   Serial.print(F("Conectando........... "));
   // nos conectamos al servidor al puerto 80 (protocolo http)
   if (client.connect(SERVER, 80)) {
