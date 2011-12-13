@@ -35,7 +35,7 @@ Configuration
 
 **config.php**
 
-- SERVER: root direction of the web interface (excluding ``http://``)
+- SERVER: server domain (excluding ``http://`` and folders). It is retrieved by default from PHP variable, if wrong, set it manually
 - CONSUMER_KEY & CONSUMER_SECRET: consumer application keys, get them from https://dev.twitter.com/apps
 - ANYWHERE_CONSUMER_KEY: key to make @Anywhere available at the page to auto-linkify @users, #hastags and http://links
 - OAUTH_CALLBACK: location of the PHP script that will receive the OAuth Callback. It should point to ``callback.php``
