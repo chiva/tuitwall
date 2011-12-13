@@ -40,7 +40,7 @@ byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
 // with the IP address and port of the server
 // that you want to connect to (port 80 is default for HTTP):
 EthernetClient client;
-char msg[VEC_LENGTH] = "Iniciando...";
+char msg[VEC_LENGTH] = "Conectando...";
 
 void setup() {
   Serial.begin(115200);
