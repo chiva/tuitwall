@@ -138,7 +138,7 @@ void getTweet(char tweet[]){
       // el tweet tiene una longitud mayor a VEC_LENGTH
       if (pos == VEC_LENGTH) c = '\0';
       // el último carácter de la cadena es el 0, por lo que sabemos que es el fin de la cadena
-      if (c == 0) {
+      if (c == '\0') {
         Serial.println(F("OK"));
         // cortamos la conexion con el servidor
         client.stop();
