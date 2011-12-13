@@ -47,12 +47,8 @@ if (count($colms)<6) {
 				break;
 			}
 			$name = $pack[0]->user->screen_name;
-            if (property_exists($pack[0],'retweeted_status')) {
-                $text = $pack[0]->retweeted_status->text;
-            }
-            else {
-                $text = $pack[0]->text;
-            }
+            if (property_exists($pack[0],'retweeted_status')) $text = $pack[0]->retweeted_status->text;
+            else $text = $pack[0]->text;
 			$text = str_replace(array('¿','º','ª'),array(),$text);
 			setlocale(LC_ALL, 'es_ES');
 			if (SHOW_USER) $text = iconv('UTF-8', 'ASCII//TRANSLIT', '@'.$name.': '.$text);
