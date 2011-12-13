@@ -3,17 +3,18 @@
 /* Cargamos la configuración y librerías */
 require_once('twitteroauth/twitteroauth.php');
 require_once('config.php');
+
 if (defined('API_KEY') && API_KEY != ''){
 	if (!isset($_GET['api']) || $_GET['api'] != API_KEY){
-		echo 'API key incorrecta!';
+		send('API key incorrecta!');
 		exit;
 	}
 }
 
 /* Si no existe el fichero de autenticación, salimos */
 if (!file_exists("auth.txt")){
-	print 'Visita '.SERVER;
-	exit;
+	send('Visita '.SERVER);
+    exit;
 }
 
 /* Obtenemos los tokens de acceso */
@@ -21,7 +22,7 @@ $file_c = file_get_contents("auth.txt");
 $colms = explode(",",trim($file_c));
 /* Si no tenemos los tokens, indicamos las acciones a tomar */
 if (count($colms)<6) {
-	print 'Visita '.SERVER;
+	send('Visita '.SERVER);
 } else {
 	$access_token = array();
 	$access_token['oauth_token'] = $colms[0];
@@ -51,14 +52,19 @@ if (count($colms)<6) {
 			setlocale(LC_ALL, 'es_ES');
 			if (SHOW_USER) $text = iconv('UTF-8', 'ASCII//TRANSLIT', '@'.$name.': '.$text);
 			else $text = iconv('UTF-8', 'ASCII//TRANSLIT', $text);
-			echo $text.''.chr(0);
+			send($text);
 			break;
 		case 420:
-			echo 'Alcanzado el límite de peticiones por hora';
+			send('Limite peticiones hora');
 			break;
 		default:
-			echo 'Error al conectar con Twitter';
+			send('Error twitter');
 			break;
 	}
+}
+
+function send($text){
+    echo $text.chr(0);
+    exit;
 }
 ?>
