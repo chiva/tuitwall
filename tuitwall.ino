@@ -54,7 +54,7 @@ void setup() {
   Serial.println(F("## Iniciando sistemas ##"));
   Serial.println();
   Serial.print(F("Panel led............ "));
-  HT1632.begin(5,6,7);
+  HT1632.begin(7,6,5);
   int wd = HT1632.getTextWidth("Welcome", FONT_5X4_WIDTH, FONT_5X4_HEIGHT);
   showText("Welcome", wd-1);
   Serial.println(F("OK"));
