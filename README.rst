@@ -54,6 +54,7 @@ Configuration
 - INTERVAL: milliseconds to wait at least between tweet requests
 - VEC_LENGTH: length of the array where the tweet will be stored
 - SPEED: milliseconds to wait at least between led matrix refreshes
+- TIMEOUT: milliseconds in which the tweet should be received
 
 The reason there are so many options to limit access to tweets is because Twitter only allows clients to make a `limited number of requests in a given hour <https://dev.twitter.com/docs/rate-limiting>`_.
 
