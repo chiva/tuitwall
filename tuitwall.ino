@@ -30,7 +30,7 @@
 #define INTERVAL 12000  // cada cuantos milisegundos pedir el tweet
 #define VEC_LENGTH 200  // longitud del vector donde se va a almacenar el tweet TODO: longitud maxima tweet con RT incluido?
 #define SPEED 40        // cambiar para variar la velocidad
-#define TIMEOUT         // tiempo maximo para recibir un tweet
+#define TIMEOUT 2000    // tiempo maximo para recibir un tweet
 
 // Introduce la direccion MAC de tu placa ethernet abajo
 // Las nuevas placas de ethernet tienen la direccion MAC imprimida en una pegatina
