@@ -103,15 +103,15 @@ void showText(char text[], int offset){
 void getTweet(char tweet[]){
   static long previousTime = 0;  // última vez que pedimos un tweet
   static boolean skipWait;       // ¿debemos saltarnos la espera?
+  static int pos = 0;            // posición del vector donde guardar un nuevo dato
+  static char buf[VEC_LENGTH];   // vector donde guardar temporalmente el tweet hasta saber que lo tenemos completo
+  static boolean timeout;        // damos por supuesto que ha ocurrido un timeout hasta que se demuestre lo contrario
+  static char c;                 // donde guardar temporalmente el últmo caracter recibido
   
   // si no tenemos que saltarnos la espera y no ha pasado INTERVAL milisegundos desde la ultima petición
   // no pedimos el nuevo tweet. Ésto es debido a que twitter limita el número de peticiones por hora a 350
   // https://dev.twitter.com/docs/rate-limiting#rest
   if (!skipWait && (millis()-INTERVAL < previousTime)) return;
-
-  static int pos = 0;            // posición del vector donde guardar un nuevo dato
-  static char buf[VEC_LENGTH];   // vector donde guardar temporalmente el tweet hasta saber que lo tenemos completo
-  static boolean timeout;        // damos por supuesto que ha ocurrido un timeout hasta que se demuestre lo contrario
 
   skipWait = true;
   timeout = true;
