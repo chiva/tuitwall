@@ -129,25 +129,28 @@ void getTweet(char tweet[]){
   
   Serial.print(F("Recibiendo........... "));
   while (client.connected() && (millis()-TIMEOUT < previousTime)) {
-    char c = client.read();
-    // si es un carácter normal, lo guardamos en el vector temporal
-    if (c != -1) buf[pos++] = c;
-    // si estamos en la última posición del vector, forzamos a escribir el delimitador de
-    // cadena de texto (\0) para así evitar sobreescribir memoria descontroladamente si
-    // el tweet tiene una longitud mayor a VEC_LENGTH
-    if (pos == VEC_LENGTH) c = '\0';
-    // el último carácter de la cadena es el 0, por lo que sabemos que es el fin de la cadena
-    if (c == 0) {
-      Serial.println(F("OK"));
-      // cortamos la conexion con el servidor
-      client.stop();
-      // copiamos la cadena recibida a la que mostramos en la barra
-      strcpy(tweet, buf);
-      Serial.print(F("Tweet: "));
-      Serial.println(tweet);
-      // no ha habido timeout, por lo que no deberemos saltarnos el límite de tiempo
-      timeout = false;
-      skipWait = false;
+    if client.available(){
+      static char c = client.read();
+      // si es un carácter normal, lo guardamos en el vector temporal
+      buf[pos++] = c;
+      // si estamos en la última posición del vector, forzamos a escribir el delimitador de
+      // cadena de texto (\0) para así evitar sobreescribir memoria descontroladamente si
+      // el tweet tiene una longitud mayor a VEC_LENGTH
+      if (pos == VEC_LENGTH) c = '\0';
+      // el último carácter de la cadena es el 0, por lo que sabemos que es el fin de la cadena
+      if (c == 0) {
+        Serial.println(F("OK"));
+        // cortamos la conexion con el servidor
+        client.stop();
+        // copiamos la cadena recibida a la que mostramos en la barra
+        strcpy(tweet, buf);
+        Serial.print(F("Tweet: "));
+        Serial.println(tweet);
+        // no ha habido timeout, por lo que no deberemos saltarnos el límite de tiempo
+        timeout = false;
+        skipWait = false;
+        pos = 0;
+      }
     }
   }
   // si ha habido timeout, cerramos la conexión y nos saltamos el límite de tiempo,
