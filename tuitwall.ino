@@ -129,7 +129,7 @@ void getTweet(char tweet[]){
   
   Serial.print(F("Recibiendo........... "));
   while (client.connected() && (millis()-TIMEOUT < previousTime)) {
-    if client.available(){
+    if (client.available()){
       static char c = client.read();
       // si es un carácter normal, lo guardamos en el vector temporal
       buf[pos++] = c;
