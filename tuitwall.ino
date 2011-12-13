@@ -86,7 +86,8 @@ void loop()
 
 void scrollText(char text[]){
   // calculamos la achura del texto
-  static int wd = HT1632.getTextWidth(text, FONT_5X4_WIDTH, FONT_5X4_HEIGHT);
+  static int wd;
+  wd = HT1632.getTextWidth(text, FONT_5X4_WIDTH, FONT_5X4_HEIGHT);
   // hacemos la animación de desplazamiento horizontal (scroll)
   for(int offset=0; offset<=OUT_SIZE+wd; offset++){
     showText(text,offset);
@@ -163,6 +164,5 @@ void getTweet(char tweet[]){
   if (timeout){
     client.stop();
     Serial.println(F("ERROR - Timeout"));
-    skipWait = true;
   }
 }
