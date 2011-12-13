@@ -85,4 +85,6 @@ The Ethernet Shield relies on a DHCP enabled network, if this is not the case, p
 Schematic
 ---------
 
+How to connect Arduino to Sure Electronic's led matrix using the provided IDC cable
+
 .. image:: https://github.com/chiva/tuitwall/raw/master/images/tuitwall-schematic.png
