@@ -37,14 +37,14 @@
 byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
 
 // Initialize the Ethernet client library
-// with the IP address and port of the server 
+// with the IP address and port of the server
 // that you want to connect to (port 80 is default for HTTP):
 EthernetClient client;
 char msg[VEC_LENGTH] = "Iniciando...";
 
 void setup() {
   Serial.begin(115200);
-  
+
   Serial.println();
   Serial.println(F("tuitwall BETA2"));
   Serial.println(F("KungFu Labs - http://www.kungfulabs.com"));
@@ -108,7 +108,7 @@ void getTweet(char tweet[]){
   static char buf[VEC_LENGTH];   // vector donde guardar temporalmente el tweet hasta saber que lo tenemos completo
   static boolean timeout;        // damos por supuesto que ha ocurrido un timeout hasta que se demuestre lo contrario
   static char c;                 // donde guardar temporalmente el últmo caracter recibido
-  
+
   // si no tenemos que saltarnos la espera y no ha pasado INTERVAL milisegundos desde la ultima petición
   // no pedimos el nuevo tweet. Ésto es debido a que twitter limita el número de peticiones por hora a 350
   // https://dev.twitter.com/docs/rate-limiting#rest
@@ -125,13 +125,13 @@ void getTweet(char tweet[]){
     // hacemos la petición del tweet mediante GET
     client.println(GET_REQUEST);
     client.println();
-  } 
+  }
   else {
     // si no conseguimos conectarnos al servidor
     Serial.println(F("ERROR"));
     return;
   }
-  
+
   Serial.print(F("Recibiendo........... "));
   while (client.connected() && (millis()-TIMEOUT < previousTime)) {
     if (client.available()){
