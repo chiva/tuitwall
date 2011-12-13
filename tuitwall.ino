@@ -109,9 +109,9 @@ void getTweet(char tweet[]){
   // https://dev.twitter.com/docs/rate-limiting#rest
   if (!skipWait && (millis()-INTERVAL < previousTime)) return;
 
-  int pos = 0;            // posición del vector donde guardar un nuevo dato
-  char buf[200];          // vector donde guardar temporalmente el tweet hasta saber que lo tenemos completo
-  boolean timeout = true; // damos por supuesto que ha ocurrido un timeout hasta que se demuestre lo contrario
+  static int pos = 0;            // posición del vector donde guardar un nuevo dato
+  static char buf[VEC_LENGTH];   // vector donde guardar temporalmente el tweet hasta saber que lo tenemos completo
+  static boolean timeout = true; // damos por supuesto que ha ocurrido un timeout hasta que se demuestre lo contrario
   
   previousTime = millis();
   Serial.print(F("Conectando........... "));
