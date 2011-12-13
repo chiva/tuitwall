@@ -63,7 +63,7 @@ void setup() {
   if (Ethernet.begin(mac) == 0) {
     Serial.println(F("ERROR - DHCP"));
     int wd = HT1632.getTextWidth("E-DHCP", FONT_5X4_WIDTH, FONT_5X4_HEIGHT);
-    showText("E-DHCP", wd-1);
+    showText("E-DHCP", wd);
     // no se pudo obtener una IP, detenemos la ejecucion del programa
     for(;;);
   }
