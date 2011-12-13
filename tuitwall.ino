@@ -105,7 +105,7 @@ void showText(char text[], int offset){
 void getTweet(char tweet[]){
   static long previousTime = 0;  // última vez que pedimos un tweet
   static boolean skipWait;       // ¿debemos saltarnos la espera?
-  static int pos = 0;            // posición del vector donde guardar un nuevo dato
+  static int pos;                // posición del vector donde guardar un nuevo dato
   static char buf[VEC_LENGTH];   // vector donde guardar temporalmente el tweet hasta saber que lo tenemos completo
   static boolean timeout;        // damos por supuesto que ha ocurrido un timeout hasta que se demuestre lo contrario
   static char c;                 // donde guardar temporalmente el últmo caracter recibido
@@ -118,6 +118,8 @@ void getTweet(char tweet[]){
   skipWait = true;
   timeout = true;
   previousTime = millis();
+  pos = 0;
+  strcpy(buf,"1");                // iniciamos la cadena a un valor conocido distinto de \0 para saber si hubo error al recibir
 
   Serial.print(F("Conectando........... "));
   // nos conectamos al servidor al puerto 80 (protocolo http)
@@ -155,12 +157,17 @@ void getTweet(char tweet[]){
         // no ha habido timeout, por lo que no deberemos saltarnos el límite de tiempo
         timeout = false;
         skipWait = false;
-        pos = 0;
       }
     }
   }
-  // si ha habido timeout, cerramos la conexión y nos saltamos el límite de tiempo,
-  // para no tener que esperar a actualizar (queremos recibirlo cuanto antes para actualizar)
+
+  // si se ha cerrado la conexión y el último carácter es distinto de 0, error
+  if (buf[pos] != '\0' && !client.connected()){
+    client.stop();
+    Serial.println(F("ERROR - Unknown response"));
+    return;
+  }
+  // si ha habido timeout, cerramos la conexión
   if (timeout){
     client.stop();
     Serial.println(F("ERROR - Timeout"));
