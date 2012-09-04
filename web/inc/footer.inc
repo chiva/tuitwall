@@ -6,13 +6,13 @@
 			<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
 		</div>
 	</div>
-	<div style="float: left; width: 302px; padding-left: 8px; margin: 0; text-align:center; border-left: 1px solid #E6E6E6; border-right: 1px solid #E6E6E6;">
+	<div style="float: left; width: 310px; padding-left: 8px; margin: 0; text-align:center; border-left: 1px solid #E6E6E6; border-right: 1px solid #E6E6E6;">
 		Comparte
 		<!-- AddThis Button BEGIN -->
 		<div class="addthis_toolbox addthis_default_style " addthis:url='http://tuitwall.kungfulabs.com' addthis:title='tuitwall | Manda tweets a la barra de LEDs' style="padding-top: 6px">
-			<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-			<a class="addthis_button_tweet"></a>
-			<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+		<a class="addthis_button_tweet"></a>
+		<a class="addthis_counter addthis_pill_style"></a>
 		</div>
 		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4ea0761e77aedad1"></script>
 		<!-- AddThis Button END -->
@@ -20,7 +20,7 @@
 	<div style="float: left; padding: 0; margin: 0; padding-left: 8px">
 		Código fuente
 		<div style="margin:0; padding-top: 4px;">
-			<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=chiva&repo=tuitwall&type=fork" allowtransparency="true" frameborder="0" scrolling="0" width="54px" height="20px"></iframe>
+			<iframe src="http://ghbtns.com/github-btn.html?user=chiva&repo=tuitwall&type=fork" allowtransparency="true" frameborder="0" scrolling="0" width="62px" height="20px"></iframe>
 		</div>
 	</div>
 </div>
