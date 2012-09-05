@@ -24,13 +24,13 @@
 #include "font_5x4.h"
 #include "HT1632.h"
 
-#define API_KEY "4Z17HHTeWELgxqIsB3WMWfu9V1SESwh6YKoG77Nr" // usa una nueva cadena distinta a la por defecto para garantizar la seguridad
-#define SERVER "tuitwall.kungfulabs.com"
-#define GET_REQUEST "GET http://" SERVER "/fetch.php?api=" API_KEY
-#define INTERVAL 12000  // cada cuantos milisegundos pedir el tweet
-#define VEC_LENGTH 200  // longitud del vector donde se va a almacenar el tweet TODO: longitud maxima tweet con RT incluido?
-#define SPEED 40        // cambiar para variar la velocidad
-#define TIMEOUT 2000    // tiempo maximo para recibir un tweet
+#define API_KEY            "4Z17HHTeWELgxqIsB3WMWfu9V1SESwh6YKoG77Nr" // usa una nueva cadena distinta a la por defecto para garantizar la seguridad
+#define SERVER             "tuitwall.kungfulabs.com"
+const char GET_REQUEST[] = "GET http://" SERVER "/fetch.php?api=" API_KEY;
+const int INTERVAL       = 12000;  // cada cuantos milisegundos pedir el tweet
+const int VEC_LENGTH     = 200;    // longitud del vector donde se va a almacenar el tweet TODO: longitud maxima tweet con RT incluido?
+const int SPEED          = 40;     // cambiar para variar la velocidad
+const int TIMEOUT        = 2000;   // tiempo maximo para recibir un tweet
 
 // Introduce la direccion MAC de tu placa ethernet abajo
 // Las nuevas placas de ethernet tienen la direccion MAC imprimida en una pegatina
@@ -83,8 +83,7 @@ void loop()
 
 void scrollText(char text[]){
   // calculamos la achura del texto
-  static int wd;
-  wd = HT1632.getTextWidth(text, FONT_5X4_WIDTH, FONT_5X4_HEIGHT);
+  int wd = HT1632.getTextWidth(text, FONT_5X4_WIDTH, FONT_5X4_HEIGHT);
   // hacemos la animación de desplazamiento horizontal (scroll)
   for(int offset=0; offset<=OUT_SIZE+wd; offset++){
     showText(text,offset);
@@ -101,18 +100,16 @@ void showText(char text[], int offset){
 
 void centerText(char text[]){
   int wd = HT1632.getTextWidth(text, FONT_5X4_WIDTH, FONT_5X4_HEIGHT);
-  int offset;
-  if (wd < OUT_SIZE) offset = int(((OUT_SIZE+float(wd))/2)+0.5);
-  else offset = OUT_SIZE;
+  int offset = (wd < OUT_SIZE) ? int(((OUT_SIZE+float(wd))/2)+0.5) : OUT_SIZE;
   showText(text, offset);
 }
 
 void getTweet(char tweet[]){
   static long previousTime = 0;  // última vez que pedimos un tweet
   static boolean skipWait;       // ¿debemos saltarnos la espera?
-  static int pos;                // posición del vector donde guardar un nuevo dato
-  static char buf[VEC_LENGTH];   // vector donde guardar temporalmente el tweet hasta saber que lo tenemos completo
-  static char c;                 // donde guardar temporalmente el últmo caracter recibido
+  int pos;                       // posición del vector donde guardar un nuevo dato
+  char buf[VEC_LENGTH];          // vector donde guardar temporalmente el tweet hasta saber que lo tenemos completo
+  char c;                        // donde guardar temporalmente el últmo caracter recibido
 
   // si no tenemos que saltarnos la espera y no ha pasado INTERVAL milisegundos desde la ultima petición
   // no pedimos el nuevo tweet. Ésto es debido a que twitter limita el número de peticiones por hora a 350
@@ -153,6 +150,7 @@ void getTweet(char tweet[]){
       // el tweet tiene una longitud mayor a VEC_LENGTH
       if (pos == VEC_LENGTH){
         c = '\0';
+        buf[pos] = c;
         Serial.print(F("OVERFLOW - "));
       }
       // el último carácter de la cadena es el 0, por lo que sabemos que es el fin de la cadena
