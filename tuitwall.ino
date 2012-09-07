@@ -26,21 +26,21 @@
 
 #define API_KEY            "4Z17HHTeWELgxqIsB3WMWfu9V1SESwh6YKoG77Nr" // usa una nueva cadena distinta a la por defecto para garantizar la seguridad
 #define SERVER             "tuitwall.kungfulabs.com"
-const char GET_REQUEST[] = "GET http://" SERVER "/fetch.php?api=" API_KEY;
-const int INTERVAL       = 12000;  // cada cuantos milisegundos pedir el tweet
-const int VEC_LENGTH     = 200;    // longitud del vector donde se va a almacenar el tweet TODO: longitud maxima tweet con RT incluido?
-const int SPEED          = 40;     // cambiar para variar la velocidad
-const int TIMEOUT        = 2000;   // tiempo maximo para recibir un tweet
+const char get_request[] = "GET http://" SERVER "/fetch.php?api=" API_KEY;
+const int interval       = 12000;  // cada cuantos milisegundos pedir el tweet
+const int vec_length     = 200;    // longitud del vector donde se va a almacenar el tweet TODO: longitud maxima tweet con RT incluido?
+const int speed          = 40;     // cambiar para variar la velocidad
+const int timeout        = 2000;   // tiempo maximo para recibir un tweet
 
 // Introduce la direccion MAC de tu placa ethernet abajo
 // Las nuevas placas de ethernet tienen la direccion MAC imprimida en una pegatina
-byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
+const byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
 
 // Initialize the Ethernet client library
 // with the IP address and port of the server
 // that you want to connect to (port 80 is default for HTTP):
 EthernetClient client;
-char msg[VEC_LENGTH] = "Conectando...";
+char msg[vec_length] = "Conectando...";
 
 void setup() {
   Serial.begin(115200);
@@ -87,7 +87,7 @@ void scrollText(char text[]){
   // hacemos la animación de desplazamiento horizontal (scroll)
   for(int offset=0; offset<=OUT_SIZE+wd; offset++){
     showText(text,offset);
-    delay(SPEED);
+    delay(speed);
   }
 }
 
@@ -108,13 +108,13 @@ void getTweet(char tweet[]){
   static long previousTime = 0;  // última vez que pedimos un tweet
   static boolean skipWait;       // ¿debemos saltarnos la espera?
   int pos;                       // posición del vector donde guardar un nuevo dato
-  char buf[VEC_LENGTH];          // vector donde guardar temporalmente el tweet hasta saber que lo tenemos completo
+  char buf[vec_length];          // vector donde guardar temporalmente el tweet hasta saber que lo tenemos completo
   char c;                        // donde guardar temporalmente el últmo caracter recibido
 
-  // si no tenemos que saltarnos la espera y no ha pasado INTERVAL milisegundos desde la ultima petición
+  // si no tenemos que saltarnos la espera y no ha pasado interval milisegundos desde la ultima petición
   // no pedimos el nuevo tweet. Ésto es debido a que twitter limita el número de peticiones por hora a 350
   // https://dev.twitter.com/docs/rate-limiting#rest
-  if (!skipWait && (millis()-INTERVAL < previousTime)){
+  if (!skipWait && (millis()-interval < previousTime)){
     Serial.println("Limitador activo - Reusar tweet");
     return;
   }
@@ -130,7 +130,7 @@ void getTweet(char tweet[]){
   if (client.connect(SERVER, 80)) {
     Serial.println(F("OK"));
     // hacemos la petición del tweet mediante GET
-    client.println(GET_REQUEST);
+    client.println(get_request);
     client.println();
   }
   else {
@@ -140,15 +140,15 @@ void getTweet(char tweet[]){
   }
 
   Serial.print(F("Recibiendo........... "));
-  while (client.connected() && (millis()-TIMEOUT < previousTime)) {
+  while (client.connected() && (millis()-timeout < previousTime)) {
     if (client.available()){
       c = client.read();
       // si es un carácter normal, lo guardamos en el vector temporal
       buf[pos++] = c;
       // si estamos en la última posición del vector, forzamos a escribir el delimitador de
       // cadena de texto (\0) para así evitar sobreescribir memoria descontroladamente si
-      // el tweet tiene una longitud mayor a VEC_LENGTH
-      if (pos == VEC_LENGTH){
+      // el tweet tiene una longitud mayor a vec_length
+      if (pos == vec_length){
         c = '\0';
         buf[pos] = c;
         Serial.print(F("OVERFLOW - "));
