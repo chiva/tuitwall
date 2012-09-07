@@ -18,7 +18,6 @@
 		</div>
 	</div>
 	<div style="float: left; display: inline-block; margin-left: 30px">
-		<iframe src="http://www.ustream.tv/embed/<?php echo USTREAM_ID;?>" width="480" height="296" scrolling="no" frameborder="0" style="border: 0px none transparent;"></iframe>
 		<object type="application/x-shockwave-flash" height="378" width="620" id="live_embed_player_flash" data="http://es-es.twitch.tv/widgets/live_embed_player.swf?channel=<?php echo TWITCH_ID;?>" bgcolor="#000000"><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://es-es.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=es-es.twitch.tv&channel=<?php echo TWITCH_ID;?>&auto_play=true&start_volume=0" /></object>
 	</div>
 </div>

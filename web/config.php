@@ -8,7 +8,7 @@ define('OAUTH_CALLBACK', 'http://'.SERVER.'/callback.php');				// fichero que re
 define('API_KEY', '4Z17HHTeWELgxqIsB3WMWfu9V1SESwh6YKoG77Nr');			// clave para limitar la petición de tweets (dejar vacío para desactivar el control)
 define('SHOW_TWEET', true);												// mostrar tweet en página principal
 define('SHOW_USER', true);												// incluir de quien es el tweet cuando Arduino lo pida
-define('STREAM', false);												// mostrar stream desde UStream para demos del proyecto
-define('TWITCH_ID', "xxxx");											// ID del stream de UStreama a mostrar
+define('STREAM', false);												// mostrar stream desde twitch.tv para demos del proyecto
+define('TWITCH_ID', 'xxxx');											// ID del stream de twitch.tv a mostrar
 define('DISALLOW_LOGOUT', false);										// deshabilita el poder cerrar sesión, útil para demos o si queremos fijar la configuración
 ?>
