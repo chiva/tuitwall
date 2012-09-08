@@ -1,7 +1,7 @@
 ErrorDocument 403 /error.php
 ErrorDocument 404 /error.php
 ErrorDocument 500 /error.php
-<Files ~ "\.inc">
+<Files ~ "\.(inc|txt)$">
   Order allow,deny
   Deny from all
 </Files>
