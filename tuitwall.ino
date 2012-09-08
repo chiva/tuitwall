@@ -34,7 +34,7 @@ const int timeout        = 2000;   // tiempo maximo para recibir un tweet
 
 // Introduce la direccion MAC de tu placa ethernet abajo
 // Las nuevas placas de ethernet tienen la direccion MAC imprimida en una pegatina
-const byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
+byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
 
 // Initialize the Ethernet client library
 // with the IP address and port of the server

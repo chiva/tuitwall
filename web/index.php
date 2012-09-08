@@ -49,8 +49,8 @@ $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oau
 
 /* Establecemos la zona horaria y la traducción de fechas */
 date_default_timezone_set('Europe/Madrid');
-$week_days = array ("", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo");
-$months = array ("", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+$week_days = array ("", "lunes", "martes", "miercoles", "jueves", "viernes", "sábado", "domingo");
+$months = array ("", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre");
 
 /* Pedimos los tweets a Twitter */
 if ($access_token['type'] == 'timeline') { $content = $connection->get('statuses/home_timeline', array('count' => 1)); }
