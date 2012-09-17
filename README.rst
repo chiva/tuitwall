@@ -100,4 +100,4 @@ Other uses
 
 The Arduino part is mostly universal, you can change the php page it connects to to another one that returns whatever you want to appear on the led matrix. It could be the weather report, current playing song, rss feed, etc. Be creative!
 
-Remember, what the php page returns should be plain text terminated by '\0'. No html, just the text you want to appear.
+Remember, what the php page returns should be plain text terminated by ``chr(0)``. No html, just the text you want to appear.
