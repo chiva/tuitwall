@@ -24,16 +24,16 @@
 #include "font_5x4.h"
 #include "HT1632.h"
 
-#define API_KEY            "4Z17HHTeWELgxqIsB3WMWfu9V1SESwh6YKoG77Nr" // usa una nueva cadena distinta a la por defecto para garantizar la seguridad
+#define API_KEY            "4Z17HHTeWELgxqIsB3WMWfu9V1SESwh6YKoG77Nr" // change the default value for security purposes
 #define SERVER             "tuitwall.kungfulabs.com"
 const char get_request[] = "GET http://" SERVER "/fetch.php?api=" API_KEY;
-const int interval       = 12000;  // cada cuantos milisegundos pedir el tweet
-const int vec_length     = 200;    // longitud del vector donde se va a almacenar el tweet TODO: longitud maxima tweet con RT incluido?
-const int speed          = 40;     // cambiar para variar la velocidad
-const int timeout        = 2000;   // tiempo maximo para recibir un tweet
+const int interval       = 12000;  // minimum time between tweet retrievals
+const int vec_length     = 200;    // maximum tweet lenght in characters
+const int speed          = 40;     // change to control text scroll speed
+const int timeout        = 2000;   // maximum time to receive a tweet
 
-// Introduce la direccion MAC de tu placa ethernet abajo
-// Las nuevas placas de ethernet tienen la direccion MAC imprimida en una pegatina
+// Add your ethernet shield MAC address
+// New ethernet shields have the MAC address printed on a sticker
 byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
 
 // Initialize the Ethernet client library
@@ -62,29 +62,29 @@ void setup() {
   if (Ethernet.begin(mac) == 0) {
     Serial.println(F("ERROR - DHCP"));
     centerText("E-DHCP");
-    // no se pudo obtener una IP, detenemos la ejecucion del programa
-    Serial.println(F("## Ejecucion detenida ##"));
+    // couldn't get an IP, DHCP error, halt execution
+    Serial.println(F("## Execution halted ##"));
     for(;;);
   }
   Serial.println(F("OK"));
-  // esperamos un segundo para que se inicie la shield Ethernet
+  // wait a second for the ethernet shield to initialize
   delay(1000);
   Serial.println();
-  Serial.println(F("## Ejecucion programa ##"));
+  Serial.println(F("## Program executing ##"));
 }
 
 void loop()
 {
-  // pedimos el último tweet
+  // get last tweet
   getTweet(msg);
-  // lo mostramos en pantalla haciendo un scroll completo
+  // show it with a scrolling motion
   scrollText(msg);
 }
 
 void scrollText(char text[]){
-  // calculamos la achura del texto
+  // calculate text width
   int wd = HT1632.getTextWidth(text, FONT_5X4_WIDTH, FONT_5X4_HEIGHT);
-  // hacemos la animación de desplazamiento horizontal (scroll)
+  // do the horizontal scrolling motion
   for(int offset=0; offset<=OUT_SIZE+wd; offset++){
     showText(text,offset);
     delay(speed);
@@ -92,90 +92,90 @@ void scrollText(char text[]){
 }
 
 void showText(char text[], int offset){
-  // vaciamos la memoria, dibujamos el texto en memoria y lo renderizamos en la matriz de LEDs
+  // empty memory, draw text in memory and render it on the LED matrix
   HT1632.clear();
   HT1632.drawText(text, OUT_SIZE - offset, 2, FONT_5X4, FONT_5X4_WIDTH, FONT_5X4_HEIGHT, FONT_5X4_STEP_GLYPH);
   HT1632.render();
 }
 
 void centerText(char text[]){
+  // calculate text width
   int wd = HT1632.getTextWidth(text, FONT_5X4_WIDTH, FONT_5X4_HEIGHT);
+  // if smaller than screen, align to the center, if bigger, align to the left
   int offset = (wd < OUT_SIZE) ? int(((OUT_SIZE+float(wd))/2)+0.5) : OUT_SIZE;
   showText(text, offset);
 }
 
 void getTweet(char tweet[]){
-  static long previousTime = 0;  // última vez que pedimos un tweet
-  static boolean skipWait;       // ¿debemos saltarnos la espera?
-  int pos;                       // posición del vector donde guardar un nuevo dato
-  char buf[vec_length];          // vector donde guardar temporalmente el tweet hasta saber que lo tenemos completo
-  char c;                        // donde guardar temporalmente el últmo caracter recibido
+  static long previousTime = 0;  // last time we asked for a tweet
+  static boolean skipWait;       // should we skip the wait? (for API call limit)
+  int pos;                       // array position where to store new data
+  char buf[vec_length];          // array where to store tweet until fully received
+  char c;                        // last character received
 
-  // si no tenemos que saltarnos la espera y no ha pasado interval milisegundos desde la ultima petición
-  // no pedimos el nuevo tweet. Ésto es debido a que twitter limita el número de peticiones por hora a 350
-  // https://dev.twitter.com/docs/rate-limiting#rest
+  // if we don't have to skip the wait but, but we haven't wait the mimimum time between requests,
+  // then we don't request a tweet. Twitter limits the number of requests per hour to 350
+  // https://dev.twitter.com/docs/rate-limiting/1.1#rest
   if (!skipWait && (millis()-interval < previousTime)){
-    Serial.println("Limitador activo - Reusar tweet");
+    Serial.println("Limiter active - Reuse tweet");
     return;
   }
 
-  skipWait = true;
+  skipWait = true;                // by default we suppose we can skip the wait
   previousTime = millis();
   pos = 0;
-  strcpy(buf,"1");                // iniciamos la cadena a un valor conocido distinto de \0 para saber si hubo error al recibir
+  strcpy(buf,"1");                // initialize the array to a value different than /0 to know if there is an error when receving
 
   Serial.println();
-  Serial.print(F("Conectando........... "));
-  // nos conectamos al servidor al puerto 80 (protocolo http)
+  Serial.print(F("Connecting........... "));
+  // connect to the server at port 80 (http)
   if (client.connect(SERVER, 80)) {
     Serial.println(F("OK"));
-    // hacemos la petición del tweet mediante GET
+    // get the tweet through a GET request
     client.println(get_request);
     client.println();
   }
   else {
-    // si no conseguimos conectarnos al servidor
+    // if failed to connect to the server
     Serial.println(F("ERROR"));
     return;
   }
 
-  Serial.print(F("Recibiendo........... "));
+  Serial.print(F("Receiving............ "));
   while (client.connected() && (millis()-timeout < previousTime)) {
     if (client.available()){
       c = client.read();
-      // si es un carácter normal, lo guardamos en el vector temporal
+      // if is a standar character, store it in the temporal buffer
       buf[pos++] = c;
-      // si estamos en la última posición del vector, forzamos a escribir el delimitador de
-      // cadena de texto (\0) para así evitar sobreescribir memoria descontroladamente si
-      // el tweet tiene una longitud mayor a vec_length
+      // if we are in the last array position, force the character to be \0 to prevent indexing outside the array
       if (pos == vec_length){
         c = '\0';
         buf[pos] = c;
         Serial.print(F("OVERFLOW - "));
       }
-      // el último carácter de la cadena es el 0, por lo que sabemos que es el fin de la cadena
+      // last character is 0, so we know is the end of the string
       if (c == '\0') {
         Serial.println(F("OK"));
-        // cortamos la conexion con el servidor
+        // close the connection to the server
         client.stop();
-        // copiamos la cadena recibida a la que mostramos en la barra
+        // copy the received array to the led matrix array to show it
         strcpy(tweet, buf);
         Serial.print(F("Tweet: "));
         Serial.println(tweet);
-        // no ha habido timeout, por lo que no deberemos saltarnos el límite de tiempo
+        // no timeout existed, so we shouldn't skip wait time
         skipWait = false;
         return;
       }
     }
   }
 
-  // si se ha cerrado la conexión y el último carácter es distinto de 0, error
+  // if connection is already closed and last character is different than 0, error
   if (buf[pos] != '\0' && !client.connected()){
     client.stop();
     Serial.println(F("ERROR - Unknown response"));
     return;
   }
-  // si ha habido timeout, cerramos la conexión
+  // if there has been a timeout, close the connection
   client.stop();
   Serial.println(F("ERROR - Timeout"));
 }
