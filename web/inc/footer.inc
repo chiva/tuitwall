@@ -2,7 +2,7 @@
 	<div style="float: left; padding: 0; margin: 0; padding-right: 8px">
 		Desarrollado por
 		<div style="margin:0; padding-top: 6px">
-			<a href="https://twitter.com/sr_chiva" class="twitter-follow-button" data-show-count="false" data-lang="es" data-width="124px">Follow @sr_chiva</a>
+			<a href="https://twitter.com/sr_chiva" class="twitter-follow-button" data-show-count="false" data-lang="es" data-width="130px">Follow @sr_chiva</a>
 			<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
 		</div>
 	</div>

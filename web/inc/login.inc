@@ -7,7 +7,7 @@
 			<input type="radio" name="tweet" value="propios" />Propios<br />
 		</div>
 		<div style="float: right; padding-left: 15px; margin: 0;">
-			<input type="image" src="https://si0.twimg.com/images/dev/buttons/sign-in-with-twitter-d.png" style="padding-top: 22px">
+			<input type="image" src="images/sign-in-with-twitter-gray.png" style="padding-top: 20px">
 		</div>
 	</div>
 </form>

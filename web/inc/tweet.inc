@@ -1,13 +1,11 @@
 <script type="text/javascript" src="blackbirdpie.js"></script>
 <script type="text/javascript" src="https://raw.github.com/twitter/twitter-text-js/master/twitter-text.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-<script src="http://platform.twitter.com/anywhere.js?id=<?php echo ANYWHERE_CONSUMER_KEY;?>&v=1" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="./css/blackbirdpie.css" />
 
 <script type="text/javascript">
 	$(document).ready(function() {
 		document.getElementById('tweet').innerHTML = twttr.txt.autoLink(document.getElementById('tweet').innerHTML);
-		twttr.anywhere(function (T) {T("#tweet").hovercards({ linkify: false });});
 	});
 </script>
 
