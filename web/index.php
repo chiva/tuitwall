@@ -54,7 +54,7 @@ $months = array ("", "enero", "febrero", "marzo", "abril", "mayo", "junio", "jul
 
 /* Pedimos los tweets a Twitter */
 if ($access_token['type'] == 'timeline') { $content = $connection->get('statuses/home_timeline', array('count' => 1)); }
-else if ($access_token['type'] == 'menciones') { $content = $connection->get('statuses/mentions', array('count' => 1)); }
+else if ($access_token['type'] == 'menciones') { $content = $connection->get('statuses/mentions_timeline', array('count' => 1)); }
 else { $content = $connection->get('statuses/user_timeline', array('count' => 1, 'include_rts' => 'true')); }
 
 if ($connection->http_code == 200){
