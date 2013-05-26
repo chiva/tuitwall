@@ -35,7 +35,7 @@ Note: this has been tested only with one led matrix, but it can be extended up t
 Configuration
 -------------
 
-**config.php**
+**web/config.php**
 
 - SERVER: server domain (including subdomain if existing, but excluding ``http://`` and sub-folders). It is retrieved by default from PHP variable, if wrong, set it manually.
 - CONSUMER_KEY & CONSUMER_SECRET: consumer application keys, get them from https://dev.twitter.com/apps.
@@ -47,7 +47,7 @@ Configuration
 - TWITCH_ID: ID of the stream from twitch.tv you want to show.
 - DISALLOW_LOGOUT: disallow logging out to keep tweets from a specific user being shown. To log out you have to delete ``auth.txt`` from the web server.
 
-**Arduino**
+**tuitwall.ino**
 
 - API_KEY: same as in ``config.php``.
 - SERVER: same as in ``config.php``.
