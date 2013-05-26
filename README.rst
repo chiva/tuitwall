@@ -89,9 +89,14 @@ How to connect Arduino to Sure Electronic's led matrix using the provided IDC ca
 
 .. image:: https://github.com/chiva/tuitwall/raw/master/images/tuitwall-schematic.png
 
-The hardware part of the project should look similar to this:
+The hardware and web part of the project should look similar to this:
 
 .. image:: https://github.com/chiva/tuitwall/raw/master/images/tuitwall-hardware.jpg
+   :width: 45%
+   :align: left
+.. image:: https://github.com/chiva/tuitwall/raw/master/images/tuitwall-web.jpg
+   :width: 45%
+   :align: right
 
 Other uses
 ----------
