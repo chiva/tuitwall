@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		<title>tuitwall</title>
-		<link rel="stylesheet" type="text/css" href="./css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
 	</head>
 	<body>
 		<a href="http://github.com/chiva/tuitwall"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
@@ -13,17 +13,17 @@
 			<?php if (DISALLOW_LOGOUT){
 				switch ($access_token['type']){
 					case "timeline":
-						echo "<h3>¿Cual es la actualidad?</h3>";
+						echo "<h3>What's happening now?</h3>";
 						break;
-					case "menciones":
-						echo "<h3>¡Menciona a @{$access_token['screen_name']} y aparece!</h3>";
+					case "mentions":
+						echo "<h3>Mention @{$access_token['screen_name']} and appear!</h3>";
 						break;
-					case "propios":
-						echo "<h3>¿Que nos cuenta?</h3>";
+					case "own":
+						echo "<h3>What's telling us?</h3>";
 						break;
 				}
 			}
-			else echo "<h3>Inicia sesión con tu usuario y verás los tweets en la barra de LEDs</h3>";
+			else echo "<h3>Login with your user and you will see the tweets in the LED matrix</h3>";
 			?>
 		</div>
 		<?php if (isset($error)) {

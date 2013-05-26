@@ -24,17 +24,19 @@
 	http://themergency.com/twitter-blackbird-pie-wordpress-plugin-demo/
 */
 
-/* Cargamos la configuración y librerías */
+/* Load required lib files. */
 require_once('twitteroauth/twitteroauth.php');
 require_once('config.php');
 
-/* Recogemos los datos del fichero donde están almacenados */
+/* Load tokens from storage file */
 $file_c = file_get_contents("auth.txt");
 $colms = explode(",",trim($file_c));
-/* Si no tenemos los tokens (fichero vacío), redirijimos a la página de conexión */
+/* If access tokens are not available redirect to connect page. */
 if (count($colms)<6) {
 	header('Location: ./clearsessions.php');
 }
+
+/* Load tokens from storage file */
 $access_token = array();
 $access_token['oauth_token'] = $colms[0];
 $access_token['oauth_token_secret'] = $colms[1];
@@ -44,30 +46,29 @@ $access_token['img_url'] = $colms[4];
 $access_token['name'] = $colms[5];
 $access_token['type'] = $colms[6];
 
-/* Creamos un objeto TwitterOauth con los tokens de consumer y usuario */
+/* Create a TwitterOauth object with consumer/user tokens. */
 $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 
-/* Establecemos la zona horaria y la traducción de fechas */
+/* Stablish timezone */
 date_default_timezone_set('Europe/Madrid');
-$week_days = array ("", "lunes", "martes", "miercoles", "jueves", "viernes", "sábado", "domingo");
-$months = array ("", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre");
 
-/* Pedimos los tweets a Twitter */
+/* Ask Twitter for tweets */
 if ($access_token['type'] == 'timeline') { $content = $connection->get('statuses/home_timeline', array('count' => 1)); }
-else if ($access_token['type'] == 'menciones') { $content = $connection->get('statuses/mentions_timeline', array('count' => 1)); }
+else if ($access_token['type'] == 'mentions') { $content = $connection->get('statuses/mentions_timeline', array('count' => 1)); }
 else { $content = $connection->get('statuses/user_timeline', array('count' => 1, 'include_rts' => 'true')); }
 
 if ($connection->http_code == 200){
 
-	/* Comprobamos que hayan tweets para mostrar */
+	/* Check that there are tweets available */
 	if (count($content) == 0) {
-		$error = 'No hay tweets';
-		include('./inc/html.inc');
+		$error = 'There are no tweets';
+		include('inc/html.inc');
 		exit;
 	}
 
-	/* Recogemos los datos que necesitemos de la respuesta */
+	/* Get the data required */
 	$tweet = array();
+    /* Was this tweet a retweet of the user? */
 	if (property_exists($content[0],'retweeted_status')) {
 		$response = $content[0]->retweeted_status;
 		$tweet['retweeted'] = true;
@@ -88,8 +89,8 @@ if ($connection->http_code == 200){
 	$tweet['id'] = $response->id_str;
 	$tweet['text'] = $response->text;
 	$tweet['source'] = $response->source;
-	$tweet['time'] = substr($week_days[date("N",strtotime($response->created_at))],0,3)." ".date("j",strtotime($response->created_at))." ".substr($months[date("n",strtotime($response->created_at))],0,3)." ".date("G:i",strtotime($response->created_at));
-	$tweet['time_long'] = date("j",strtotime($response->created_at))." de ".$months[date("n",strtotime($response->created_at))]." de ".date("Y",strtotime($response->created_at))." a las ".date("G:i",strtotime($response->created_at));
+	$tweet['time'] = date("D",strtotime($response->created_at))." ".date("j",strtotime($response->created_at))." ".date("M",strtotime($response->created_at))." ".date("G:i",strtotime($response->created_at));
+	$tweet['time_long'] = date("j",strtotime($response->created_at))." ".date("F",strtotime($response->created_at))." ".date("Y",strtotime($response->created_at))." at ".date("G:i",strtotime($response->created_at));
 	$tweet['text_color'] = $response->user->profile_text_color;
 	$tweet['link_color'] = $response->user->profile_link_color;
 
@@ -97,14 +98,14 @@ if ($connection->http_code == 200){
 else {
 	switch ($connection->http_code){
 		case 420:
-			$error = 'Alcanzado el límite de peticiones por hora';
+			$error = 'Hourly request limit reached';
 			break;
 		default:
-			$error =  'Error al conectar con Twitter: '.$connection->http_code;
+			$error =  'Error connecting to Twitter: '.$connection->http_code;
 			break;
 	}
 }
 
-/* Cargamos la página html */
-include('./inc/html.inc');
+/* Include HTML to display on the page */
+include('inc/html.inc');
 ?>

@@ -1,4 +1,4 @@
 <?php
-/* Redirijimos a la página para conectarse con Twitter */
+/* Redirect to the Twitter login page */
 header('Location: http://'.$_SERVER['SERVER_NAME']);
 ?>

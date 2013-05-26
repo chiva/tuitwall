@@ -1,10 +1,14 @@
 <?php
- 
-/* Destruimos la sesión y vaciamos el fichero de datos */
+/**
+ * @file
+ * Clears PHP sessions and redirects to the connect page.
+ */
+
+ /* Load and clear sessions and storage file*/
 session_start();
 session_destroy();
 fclose(fopen("auth.txt","w"));
  
-/* Redirijimos a la página para conectarse con Twitter */
+/* Redirect to page with the connect to Twitter option. */
 header('Location: ./connect.php');
 ?>

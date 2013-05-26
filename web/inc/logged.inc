@@ -3,7 +3,7 @@
 		<?php echo ucfirst($access_token['type']);?>
 		<div style="margin:0; padding-top:3px;">
 			<?php if (!DISALLOW_LOGOUT){
-				echo "<a href='./clearsessions.php'>Cerrar Sesión</a>";
+				echo "<a href='./clearsessions.php'>Logout</a>";
 			}?>
 		</div>
 	</div>

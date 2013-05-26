@@ -17,14 +17,14 @@
 		<style>.bbpBoxIn span a { color: #<?php echo $tweet['link_color'];?> }</style>
 		<span class="bbpTweet" id="tweet"><?php echo $tweet['text'];?></span>
 		<div class="bbp-actions">
-			<a title="tuiteado el <?php echo $tweet['time_long'];?>h" style="padding-left:20px;" href="http://twitter.com/<?php echo $tweet['nick'];?>/status/<?php echo $tweet['id'];?>" target="_blank"><?php echo $tweet['time'];?></a>
-			vía <?php echo $tweet['source'];?>
+			<a title="<?php echo $tweet['time_long'];?>h" style="padding-left:20px;" href="http://twitter.com/<?php echo $tweet['nick'];?>/status/<?php echo $tweet['id'];?>" target="_blank"><?php echo $tweet['time'];?></a>
+			via <?php echo $tweet['source'];?>
 			<a href="https://twitter.com/intent/tweet?in_reply_to=<?php echo $tweet['id'];?>" onclick="javascript:_gaq.push([&#39;_trackEvent&#39;,&#39;outbound-article&#39;,&#39;twitter.com&#39;]);" class="bbp-action bbp-reply-action" title="Responder">
-				<span><em></em>Responder</span></a>
+				<span><em></em>Answer</span></a>
 			<a href="https://twitter.com/intent/retweet?tweet_id=<?php echo $tweet['id'];?>" onclick="javascript:_gaq.push([&#39;_trackEvent&#39;,&#39;outbound-article&#39;,&#39;twitter.com&#39;]);" class="bbp-action bbp-retweet-action" title="Retweet">
 				<span><em></em>Retweet</span></a>
 			<a href="https://twitter.com/intent/favorite?tweet_id=<?php echo $tweet['id'];?>" onclick="javascript:_gaq.push([&#39;_trackEvent&#39;,&#39;outbound-article&#39;,&#39;twitter.com&#39;]);" class="bbp-action bbp-favorite-action" title="Favorito">
-				<span><em></em>Favorito</span></a>
+				<span><em></em>Favorite</span></a>
 		</div>
 		<div style="float:left; padding:0; margin:0">
 			<a href="http://twitter.com/intent/user?screen_name=<?php echo $tweet['nick'];?>" >

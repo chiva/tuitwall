@@ -37,7 +37,7 @@ if (count($colms)<6) {
 	$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 	/* Recogemos el tweet, lo procesamos y mostramos */
 	if ($access_token['type'] == 'timeline') { $pack = $connection->get('statuses/home_timeline', array('count' => 1)); }
-	else if ($access_token['type'] == 'menciones') { $pack = $connection->get('statuses/mentions', array('count' => 1)); }
+	else if ($access_token['type'] == 'mentions') { $pack = $connection->get('statuses/mentions', array('count' => 1)); }
 	else { $pack = $connection->get('statuses/user_timeline', array('count' => 1, 'include_rts' => 'true')); }
 	switch ($connection->http_code) {
 		case 200:

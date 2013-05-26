@@ -1,15 +1,21 @@
 <?php
 
-/* Cargamos la configuración */
-require_once('config.php');
+/**
+ * @file
+ * Check if consumer token is set and if so send user to get a request token.
+ */
 
-/* Salimos con un mensaje de error si CONSUMER_KEY o CONSUMER_SECRET no están definidos */
+/**
+ * Exit with an error message if the CONSUMER_KEY or CONSUMER_SECRET is not defined.
+ */
+require_once('config.php');
 if (CONSUMER_KEY === '' || CONSUMER_SECRET === '') {
   $error = 'Tienes que definir las claves de aplicación. Consigue unas en <a href="https://twitter.com/apps">https://twitter.com/apps</a>';
 }
 
-/* Activamos para mostrar el html apropiado de dentro del inc */
+/* Activate the login portion of the html page */
 $login = true;
-/* Cargamos la página HTML */
+
+/* Include HTML to display on the page. */
 include('./inc/html.inc');
 ?>
